@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -7,6 +9,13 @@ import { Component } from '@angular/core';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ListComponent implements OnInit{
+  products: any[] = [];
+  httpClient = inject(HttpClient);
 
+  ngOnInit(): void {
+    this.httpClient.get<any>('/api/products').subscribe((products) => {
+      this.products = products
+    })
+  }
 }
