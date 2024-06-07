@@ -4,10 +4,4 @@
 
     display: flex;
     flex-wrap: wrap;
-
-    mat-card {
-        color: rgb(250, 211, 218);
-        width: calc(33.33% - 10px);
-        margin: 0 10px 10px 0;
-    }
 }
