@@ -9,7 +9,4 @@ import { MatToolbarModule } from '@angular/material/toolbar'
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  @Input() firstListItem: string = "";
-  @Input() secondListItem: string = "";
-  @Input() thirdListItem: string = ""
 }
