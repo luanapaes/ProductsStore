@@ -1,7 +1,16 @@
-.card-container {
-    margin-top: 50px;
-    width: 780px;
+.list-container {
+    margin-top: 20px;
 
-    display: flex;
-    flex-wrap: wrap;
+    .button {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 20px;
+    }
+
+    .card-container {
+        width: 780px;
+
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
