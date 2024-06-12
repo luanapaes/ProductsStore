@@ -42,12 +42,7 @@ export class CreateComponent {
       this.productService.createProduct({
         title: this.formProduct.controls.title.value
       }).subscribe(() => {
-        this.matSnackBar.open("Produto cadastrado com sucesso!", "Ok", {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        })
-
+        this.matSnackBar.open("Produto cadastrado com sucesso!", "Ok")
         this.router.navigateByUrl('/')
       })
     }
