@@ -1,5 +1,4 @@
-import { JsonPipe } from '@angular/common';
-import { Component, Input, computed, input } from '@angular/core';
+import { Component, EventEmitter, Output, computed, input } from '@angular/core';
 
 //Material 
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +14,8 @@ import { Product } from '../../../../shared/interfaces/products.interface';
 })
 export class CardComponent {
   product = input.required<Product>();
+
+  @Output() edit = new EventEmitter()
 
   productTitle = computed(() =>  this.product().title )
 }
