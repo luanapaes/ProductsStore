@@ -13,9 +13,17 @@ export class ProductsService {
     return this.httpClient.get<Product[]>('/api/products')
   }
 
+  getProduct(id: string){
+    return this.httpClient.get<Product>(`/api/products/${id}`)
+  }
+
   createProduct(payload: ProductPayload){
     console.log("chegou", payload)
     return this.httpClient.post('/api/products', payload)
+  }
+
+  editProduct(id: string, payload: ProductPayload){
+    return this.httpClient.put(`/api/products/${id}`, payload)
   }
 
   constructor() { }
