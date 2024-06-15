@@ -1,24 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsService } from '../../shared/services/products.service';
-import { Router } from '@angular/router';
-import { ListComponent } from '../list/list.component';
+import { Router } from '@angular/router';import { ListComponent } from '../list/list.component';
+import { FormComponent } from '../../shared/components/form/form.component';
+import { Product } from '../../shared/interfaces/products.interface';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule
-  ],
+  imports: [FormComponent],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss'
 })
@@ -28,23 +18,10 @@ export class CreateComponent {
   router = inject(Router)
 
 
-  formProduct = new FormGroup({
-    title: new FormControl<string>('',
-      {
-        nonNullable: true,
-        validators: Validators.required
-      }
-    )
-  });
-
-  onSubmit() {
-    if (this.formProduct.valid) {
-      this.productService.createProduct({
-        title: this.formProduct.controls.title.value
-      }).subscribe(() => {
+  onSubmit(product: Product) {
+      this.productService.createProduct(product).subscribe(() => {
         this.matSnackBar.open("Produto cadastrado com sucesso!", "Ok")
         this.router.navigateByUrl('/')
       })
     }
   }
-}

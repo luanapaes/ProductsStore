@@ -1,0 +1,8 @@
+<form [formGroup]="formProduct" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input matInput type="text" name="title" formControlName="title">
+    </mat-form-field>
+
+    <button type="submit" mat-flat-button color="accent" [disabled]="formProduct.invalid">Cadastrar</button>
+</form>
