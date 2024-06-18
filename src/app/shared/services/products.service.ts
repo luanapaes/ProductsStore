@@ -18,12 +18,15 @@ export class ProductsService {
   }
 
   createProduct(payload: ProductPayload){
-    console.log("chegou", payload)
     return this.httpClient.post('/api/products', payload)
   }
 
   editProduct(id: string, payload: ProductPayload){
     return this.httpClient.put(`/api/products/${id}`, payload)
+  }
+
+  deleteProduct(id: string){
+    return this.httpClient.delete(`/api/products/${id}`)
   }
 
   constructor() { }
