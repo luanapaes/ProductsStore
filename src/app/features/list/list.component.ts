@@ -1,10 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
 import { Product } from '../../shared/interfaces/products.interface';
 import { CardComponent } from './components/card/card.component';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogService } from '../../shared/services/confirmation-dialog.service';
 import { filter } from 'rxjs';
 
@@ -15,17 +14,12 @@ import { filter } from 'rxjs';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent implements OnInit {
-  products: Product[] = [];
+export class ListComponent{
+  products = signal<Product[]>(inject(ActivatedRoute).snapshot.data['products']);
+  // o products iniciará com o valor do signal que são os produtos vindos da rota(file: app.routes.ts)
   productsService = inject(ProductsService);
   router = inject(Router)
   confirmationDialogService = inject(ConfirmationDialogService)
-
-  ngOnInit(): void {
-    this.productsService.getAll().subscribe((prod) => {
-      this.products = prod
-    })
-  }
 
   onEdit(product: Product) {
     this.router.navigate(['edit-product', product.id])
@@ -37,7 +31,7 @@ export class ListComponent implements OnInit {
       .subscribe(() => {
         this.productsService.deleteProduct(product.id).subscribe(() => {
           this.productsService.getAll().subscribe((prod) => {
-            this.products = prod
+            this.products.set(prod)
           })
         });
       })
