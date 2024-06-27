@@ -1,0 +1,15 @@
+a {
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 10px;
+    transition: all .5s ease;
+}
+
+a:hover {
+    border-radius: 25px;
+    background: #4c288a35;
+}
+
+a:visited {
+    color: #4c288a35;
+}
